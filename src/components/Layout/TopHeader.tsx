@@ -19,9 +19,9 @@ export const TopHeader: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <button style={{
           background: 'none', border: 'none', cursor: 'pointer',
-          color: 'var(--text-muted)', display: 'flex', alignItems: 'center'
+          display: 'flex', alignItems: 'center', padding: 0
         }}>
-          <PanelLeft size={16} strokeWidth={1.33} />
+          <img src="/Logo Container.png" alt="Toggle Menu" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
         </button>
       </div>
 

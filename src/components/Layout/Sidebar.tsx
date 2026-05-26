@@ -38,18 +38,10 @@ export const Sidebar: React.FC = () => {
         height: 'var(--header-height)',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
         borderBottom: '1px solid var(--border-light)',
-        padding: '0 9px'
+        padding: '0 24px'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary)', fontWeight: 800, fontSize: '24px', fontStyle: 'italic' }}>
-          <span style={{ position: 'relative' }}>
-            Jiva<span style={{ fontSize: '12px', verticalAlign: 'super' }}>™</span>
-          </span>
-          <div style={{ display: 'flex', flexDirection: 'column', fontSize: '10px', fontStyle: 'normal', fontWeight: 600 }}>
-            <span style={{ color: 'var(--danger)', marginTop: '12px' }}>HEALTH</span>
-          </div>
-        </div>
+        <img src="/Jiva_health-removebg-preview 1 2.png" alt="Jiva Health Logo" style={{ height: '32px', objectFit: 'contain' }} />
       </div>
       
       <nav style={{
