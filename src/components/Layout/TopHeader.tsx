@@ -19,9 +19,10 @@ export const TopHeader: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <button style={{
           background: 'none', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', padding: 0
+          display: 'flex', alignItems: 'center', justifyContent: 'center', 
+          width: '36px', height: '36px', padding: 0
         }}>
-          <img src="/Logo Container.png" alt="Toggle Menu" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+          <img src="/Logo Container.png" alt="Toggle Menu" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </button>
       </div>
 
@@ -39,16 +40,17 @@ export const TopHeader: React.FC = () => {
           width: '388px',
           height: '35px',
           gap: '12px',
-          backgroundColor: 'var(--bg-input)'
+          backgroundColor: '#FFFFFF'
         }}>
           <Search size={16} color="var(--text-faint)" />
           <input 
             type="text" 
-            placeholder="Search by patient, doctor, or specialty." 
+            placeholder="Search" 
             style={{
               border: 'none', outline: 'none', width: '100%',
               fontFamily: 'var(--font-family)', fontSize: '16px',
-              fontWeight: 500, lineHeight: 1, backgroundColor: 'transparent'
+              fontWeight: 500, lineHeight: 1, backgroundColor: 'transparent',
+              color: 'var(--text-main)'
             }} 
           />
         </div>
