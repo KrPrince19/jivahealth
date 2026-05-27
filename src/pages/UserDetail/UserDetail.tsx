@@ -4,7 +4,7 @@ import { useAppStore } from '../../store/useAppStore';
 import { 
   ChevronLeft, Calendar, Activity, Crown, ChevronDown, 
   ShoppingBag, CreditCard, User as UserIcon, ClipboardList, Users,
-  Mail, Phone, Heart, Edit2, Plus, MapPin, CheckCircle, Check
+  Mail, Phone, Heart, Edit2, Plus, MapPin, CheckCircle, Check, Trash2
 } from 'lucide-react';
 import { Avatar } from '../../components/UI/Avatar';
 import { Badge } from '../../components/UI/Badge';
@@ -217,10 +217,125 @@ export const UserDetail: React.FC = () => {
           </div>
         )}
 
-        {/* Orders & Bookings / Payments / Family Members would go here */}
-        {activeTab !== 'Overview' && (
-          <div style={{ padding: '40px', textAlign: 'center', backgroundColor: 'var(--bg-card)', borderRadius: '8px' }}>
-             Content for {activeTab} (Mock layout for demonstration)
+        {/* Family Members */}
+        {activeTab === 'Family Members' && (
+          <div style={{ backgroundColor: 'transparent' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <h2 style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-main)' }}>Order History</h2>
+              <Button variant="primary"><Plus size={16} /> Add Member</Button>
+            </div>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {user.familyMembers.length === 0 ? (
+                <div style={{ padding: '40px', textAlign: 'center', backgroundColor: '#fff', borderRadius: '8px', border: '1px solid var(--border-light)' }}>No family members found</div>
+              ) : user.familyMembers.map(member => (
+                <div key={member.id} className="card-shadow" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fff', padding: '20px 24px', borderRadius: '8px', border: '1px solid var(--border-light)' }}>
+                  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                    <Avatar initials={member.name.split(' ').map(n=>n[0]).join('')} size="large" />
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-black)' }}>{member.name}</span>
+                        <Badge type="Inactive">{member.relation}</Badge>
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: 'var(--text-sub)' }}>
+                           <Phone size={14} /> {member.phone}
+                         </div>
+                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: 'var(--text-sub)' }}>
+                           <Calendar size={14} /> {member.dob}
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: '12px' }}>
+                    <Button variant="secondary" style={{ width: '40px', height: '40px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Edit2 size={16} /></Button>
+                    <Button variant="secondary" style={{ width: '40px', height: '40px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--danger)' }}><Trash2 size={16} /></Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Orders & Bookings */}
+        {activeTab === 'Orders & Bookings' && (
+          <div style={{ backgroundColor: 'transparent' }}>
+            <div style={{ marginBottom: '16px' }}>
+              <h2 style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-main)' }}>Order History</h2>
+            </div>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {user.orders.length === 0 ? (
+                <div style={{ padding: '40px', textAlign: 'center', backgroundColor: '#fff', borderRadius: '8px', border: '1px solid var(--border-light)' }}>No orders found</div>
+              ) : user.orders.map(order => (
+                <div key={order.id} className="card-shadow" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fff', padding: '20px 24px', borderRadius: '8px', border: '1px solid var(--border-light)' }}>
+                  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                    <div style={{ width: '48px', height: '48px', backgroundColor: 'var(--icon-bg-teal)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
+                      <ShoppingBag size={24} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-black)' }}>Order #{order.id}</span>
+                        <Badge type={order.status as any}>{order.status}</Badge>
+                      </div>
+                      <div style={{ fontSize: '14px', color: 'var(--text-sub)' }}>
+                         {order.items}
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '12px', color: 'var(--text-muted)' }}>
+                        <span>{order.date}</span>
+                        <span style={{ fontWeight: 500, color: 'var(--text-main)' }}>₹{order.amount.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '130px', height: '40px', padding: '0 12px', backgroundColor: 'var(--bg-page)', border: '1px solid var(--border-light)', borderRadius: '6px', cursor: 'pointer' }}>
+                      <span style={{ fontSize: '14px', color: 'var(--text-main)' }}>{order.status}</span>
+                      <ChevronDown size={14} color="var(--text-muted)" />
+                    </div>
+                    <Button variant="secondary" style={{ width: '40px', height: '40px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--danger)' }}><Trash2 size={16} /></Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Payments */}
+        {activeTab === 'Payments' && (
+          <div style={{ backgroundColor: 'transparent' }}>
+            <div style={{ marginBottom: '16px' }}>
+              <h2 style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-main)' }}>Order History</h2>
+            </div>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {user.payments.length === 0 ? (
+                <div style={{ padding: '40px', textAlign: 'center', backgroundColor: '#fff', borderRadius: '8px', border: '1px solid var(--border-light)' }}>No payments found</div>
+              ) : user.payments.map(payment => (
+                <div key={payment.id} className="card-shadow" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fff', padding: '20px 24px', borderRadius: '8px', border: '1px solid var(--border-light)' }}>
+                  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                    <div style={{ width: '48px', height: '48px', backgroundColor: 'var(--badge-green-bg)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary-dark)' }}>
+                      <CreditCard size={24} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-black)' }}>{payment.type}</span>
+                        <Badge type="Active">{payment.status}</Badge>
+                      </div>
+                      <div style={{ fontSize: '14px', color: 'var(--text-sub)' }}>
+                         {payment.description}
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '12px', color: 'var(--text-muted)' }}>
+                        <span>{payment.date}</span>
+                        <span style={{ fontWeight: 500, color: 'var(--text-main)' }}>₹{payment.amount.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                    <span style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-main)' }}>₹ {payment.amount.toFixed(2)}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>

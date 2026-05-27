@@ -32,7 +32,8 @@ export const Badge: React.FC<BadgeProps> = ({ type, children, className = '' }) 
       break;
     case 'Normal User':
     case 'Support Staff':
-      bg = 'transparent';
+      bg = '#ffffff';
+      border = '1px solid var(--border-light)';
       color = 'var(--text-sub)'; // #4a5565
       break;
     case 'Pending':

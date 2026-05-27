@@ -118,9 +118,11 @@ export const UserList: React.FC = () => {
               <Avatar initials={user.name.split(' ').map(n=>n[0]).join('')} size="medium" />
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <span style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-black)' }}>{user.name}</span>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <Badge type={user.role}>{user.role}</Badge>
-                  <Badge type={user.status}>{user.status}</Badge>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-start' }}>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <Badge type={user.role}>{user.role}</Badge>
+                    <Badge type={user.status}>{user.status}</Badge>
+                  </div>
                   <Badge type={user.type}>{user.type}</Badge>
                 </div>
               </div>
@@ -135,26 +137,35 @@ export const UserList: React.FC = () => {
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: 'var(--text-user)' }}>
-                <Calendar size={14} color="var(--text-sub)" /> Joined {user.joinedDate}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--text-sub)' }}>
+                <Calendar size={14} /> Joined
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--text-muted)' }}>
-                <Activity size={12} /> Last: {user.lastActive}
+              <div style={{ fontSize: '14px', fontWeight: 500, color: 'var(--text-main)', marginBottom: '4px' }}>
+                {user.joinedDate}
               </div>
-              <div style={{ fontSize: '14px', color: 'var(--text-muted)' }}>
-                Appointments <span style={{ color: 'var(--accent-blue)', fontWeight: 500 }}>{user.appointmentsCount}</span>
+              <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                Last: {user.lastActive}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                Appointments
+              </div>
+              <div style={{ fontSize: '24px', fontWeight: 500, color: 'var(--accent-blue)' }}>
+                {user.appointmentsCount}
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Button variant="primary" style={{ width: '149px', backgroundColor: '#F58B12', color: '#fff', border: 'none' }}>
+              <Button variant="primary" style={{ width: 'max-content', padding: '0 16px', backgroundColor: '#F58B12', color: '#fff', border: 'none' }}>
                 <Crown size={14} /> Upgrade to Prime
               </Button>
-              <Button variant="secondary" style={{ width: '68px' }} onClick={() => navigate(`/users/${user.id}`)}>
+              <Button variant="secondary" style={{ width: 'max-content', padding: '0 16px' }} onClick={() => navigate(`/users/${user.id}`)}>
                 <Eye size={14} /> View
               </Button>
-              <Button variant="secondary" style={{ width: '65px' }}>
+              <Button variant="secondary" style={{ width: 'max-content', padding: '0 16px' }}>
                 <Edit2 size={14} /> Edit
               </Button>
             </div>
