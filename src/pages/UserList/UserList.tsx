@@ -4,7 +4,7 @@ import { Button } from '../../components/UI/Button';
 import { StatCard } from '../../components/UI/StatCard';
 import { Badge } from '../../components/UI/Badge';
 import { Avatar } from '../../components/UI/Avatar';
-import { Plus, Search, ChevronDown, Mail, Phone, Calendar, Activity, ArrowRight, Eye, Edit2, Crown } from 'lucide-react';
+import { Plus, Search, ChevronDown, Mail, Phone, Calendar, ArrowRight, Eye, Edit2, Crown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { AddUserModal } from '../../components/UI/AddUserModal';
 

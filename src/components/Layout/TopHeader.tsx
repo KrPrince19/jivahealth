@@ -1,5 +1,5 @@
 import React from 'react';
-import { PanelLeft, Search, Moon, Bell } from 'lucide-react';
+import { Search, Moon, Bell } from 'lucide-react';
 import { Avatar } from '../UI/Avatar';
 
 export const TopHeader: React.FC = () => {
