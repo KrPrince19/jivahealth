@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from './Sidebar';
 import { TopHeader } from './TopHeader';
 
@@ -7,11 +7,20 @@ interface DashboardLayoutProps {
 }
 
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
   return (
     <div className="app-container">
-      <Sidebar />
+      {isSidebarOpen && (
+        <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)} />
+      )}
+      <div className={`sidebar-container ${isSidebarOpen ? 'open' : ''}`}>
+        <Sidebar onClose={() => setIsSidebarOpen(false)} />
+      </div>
       <main className="main-content">
-        <TopHeader />
+        <TopHeader onToggleSidebar={toggleSidebar} />
         <div className="page-container">
           <div className="content-max-width">
             {children}

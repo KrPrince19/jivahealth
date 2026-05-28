@@ -22,7 +22,11 @@ const navItems = [
   { path: '/settings', label: 'Setting', icon: Settings },
 ];
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  onClose?: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
   const location = useLocation();
 
   return (
@@ -32,11 +36,13 @@ export const Sidebar: React.FC = () => {
       borderRight: '1px solid var(--border-light)',
       display: 'flex',
       flexDirection: 'column',
-      height: '100%'
+      height: '100%',
+      overflow: 'hidden'
     }}>
       <div style={{
-        width: '257px',
+        width: '100%',
         height: '64px',
+        minHeight: '64px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -48,18 +54,19 @@ export const Sidebar: React.FC = () => {
       </div>
       
       <div style={{
-        width: '257px',
-        height: '697px',
+        width: '100%',
+        flex: 1,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         backgroundColor: '#FFFFFF',
         border: '1px solid #F0F1F2',
-        opacity: 1
+        opacity: 1,
+        overflow: 'hidden'
       }}>
         <nav className="hide-scrollbar" style={{
-          width: '257px',
-          height: '524px',
+          width: '100%',
+          flex: 1,
           overflowY: 'auto',
           padding: '24px 16px',
           display: 'flex',
@@ -74,6 +81,7 @@ export const Sidebar: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={onClose}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -96,8 +104,9 @@ export const Sidebar: React.FC = () => {
         </nav>
 
         <div style={{
-          width: '257px',
+          width: '100%',
           height: '88px',
+          minHeight: '88px',
           padding: '16px',
           display: 'flex',
           alignItems: 'center',
@@ -115,3 +124,4 @@ export const Sidebar: React.FC = () => {
     </aside>
   );
 };
+

@@ -2,7 +2,11 @@ import React from 'react';
 import { Search, Moon, Bell } from 'lucide-react';
 import { Avatar } from '../UI/Avatar';
 
-export const TopHeader: React.FC = () => {
+interface TopHeaderProps {
+  onToggleSidebar?: () => void;
+}
+
+export const TopHeader: React.FC<TopHeaderProps> = ({ onToggleSidebar }) => {
   return (
     <header style={{
       height: 'var(--header-height)',
@@ -17,11 +21,14 @@ export const TopHeader: React.FC = () => {
       width: '100%'
     }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <button style={{
-          background: 'none', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', 
-          width: '36px', height: '36px', padding: 0
-        }}>
+        <button 
+          onClick={onToggleSidebar}
+          style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', 
+            width: '36px', height: '36px', padding: 0
+          }}
+        >
           <img src="/Logo Container.png" alt="Toggle Menu" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </button>
       </div>
@@ -30,7 +37,7 @@ export const TopHeader: React.FC = () => {
         position: 'absolute',
         left: '50%',
         transform: 'translateX(-50%)'
-      }}>
+      }} className="search-container">
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -38,10 +45,11 @@ export const TopHeader: React.FC = () => {
           borderRadius: '6px',
           padding: '8px 12px',
           width: '388px',
+          maxWidth: '100%',
           height: '35px',
           gap: '12px',
           backgroundColor: '#FFFFFF'
-        }}>
+        }} className="search-container">
           <Search size={16} color="var(--text-faint)" />
           <input 
             type="text" 
@@ -62,7 +70,7 @@ export const TopHeader: React.FC = () => {
         gap: '20px',
         marginLeft: 'auto'
       }}>
-        <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
+        <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }} className="hide-on-mobile">
           <Moon size={20} />
         </button>
         <button style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative' }}>
